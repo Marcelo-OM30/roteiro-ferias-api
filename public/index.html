@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roteiro de Férias - Login</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="blue-grey lighten-5">
+
+    <nav class="blue darken-2">
+        <div class="nav-wrapper container">
+            <a href="#" class="brand-logo">
+                <i class="material-icons left">flight_takeoff</i>
+                Roteiro de Férias
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#" id="aboutBtn"><i class="material-icons left">info</i>Sobre</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m8 l6 offset-m2 offset-l3">
+
+                <div class="card" id="loginCard">
+                    <div class="card-content">
+                        <span class="card-title center-align">
+                            <i class="material-icons medium blue-text">account_circle</i>
+                            <br>Fazer Login
+                        </span>
+
+                        <form id="loginForm">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">person</i>
+                                    <input id="username" type="text" class="validate" required>
+                                    <label for="username">Nome de Usuário</label>
+                                    <span class="helper-text" data-error="Campo obrigatório"
+                                        data-success="Usuário válido">Digite o nome do usuário. exemplo: admin</span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">lock</i>
+                                    <input id="password" type="password" class="validate" required>
+                                    <label for="password">Senha</label>
+                                    <span class="helper-text" data-error="Campo obrigatório"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col s12">
+                                    <button class="btn waves-effect waves-light blue darken-1 btn-large col s12"
+                                        type="submit" id="loginBtn">
+                                        <i class="material-icons left">send</i>
+                                        Entrar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="row">
+                            <div class="col s12 center-align">
+                                <a href="#" id="forgotPasswordLink" class="blue-text text-darken-2">
+                                    <i class="material-icons tiny">help</i>
+                                    Esqueci minha senha
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="message" class="card-panel" style="display: none;">
+                            <span id="messageText"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" id="forgotCard" style="display: none;">
+                    <div class="card-content">
+                        <span class="card-title center-align">
+                            <i class="material-icons medium green-text">mail_outline</i>
+                            <br>Recuperar Senha
+                        </span>
+
+                        <p class="center-align grey-text">
+                            Digite seu email para receber as instruções de recuperação
+                        </p>
+
+                        <form id="forgotForm">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="material-icons prefix">email</i>
+                                    <input id="email" type="email" class="validate" required>
+                                    <label for="email">Email</label>
+                                    <span class="helper-text" data-error="Email inválido"
+                                        data-success="Email válido"></span>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col s6">
+                                    <button class="btn waves-effect waves-light green btn-large col s12" type="submit"
+                                        id="forgotBtn">
+                                        <i class="material-icons left">send</i>
+                                        Enviar
+                                    </button>
+                                </div>
+                                <div class="col s6">
+                                    <button class="btn waves-effect waves-light grey btn-large col s12" type="button"
+                                        id="backToLogin">
+                                        <i class="material-icons left">arrow_back</i>
+                                        Voltar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card" id="aboutCard" style="display: none;">
+                    <div class="card-content">
+                        <span class="card-title center-align">
+                            <i class="material-icons medium orange-text">info</i>
+                            <br>Sobre o Sistema
+                        </span>
+
+                        <div class="collection">
+                            <div class="collection-item">
+                                <strong>🎯 Objetivo:</strong> Aplicação que consome API de login
+                            </div>
+                            <div class="collection-item">
+                                <strong>🛠️ Tecnologias:</strong> Express.js, MaterializeCSS, Cypress
+                            </div>
+                            <div class="collection-item">
+                                <strong>🔐 API:</strong> Sistema de autenticação integrado
+                            </div>
+                            <div class="collection-item">
+                                <strong>✨ Recursos:</strong> Login, recuperação de senha, roteiros
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s12">
+                                <button class="btn waves-effect waves-light blue btn-large col s12" type="button"
+                                    id="backToLoginFromAbout">
+                                    <i class="material-icons left">arrow_back</i>
+                                    Voltar ao Login
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="page-footer blue darken-2">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Roteiro de Férias</h5>
+                    <p class="grey-text text-lighten-4">
+                        Sistema integrado de autenticação e gerenciamento de roteiros de viagem.
+                    </p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#" id="footerAbout">Sobre</a></li>
+                        <li><a class="grey-text text-lighten-3" href="/health" target="_blank">Status do Sistema</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2025 Desafio Universitário - Marcelo OM30
+                <a class="grey-text text-lighten-4 right" href="https://github.com/Marcelo-OM30"
+                    target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+    <script src="js/auth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>

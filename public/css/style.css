@@ -1,0 +1,256 @@
+/* CSS Customizado para Roteiro de Férias */
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* Cards */
+.card {
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.card-title {
+    margin-bottom: 30px !important;
+    font-weight: 300;
+}
+
+.card-title i {
+    margin-bottom: 10px;
+}
+
+/* Inputs */
+.input-field input:focus+label {
+    color: #2196F3 !important;
+}
+
+.input-field input:focus {
+    border-bottom: 2px solid #2196F3 !important;
+    box-shadow: 0 1px 0 0 #2196F3 !important;
+}
+
+.input-field .prefix.active {
+    color: #2196F3 !important;
+}
+
+/* Botões */
+.btn-large {
+    border-radius: 25px;
+    font-weight: 500;
+    text-transform: none;
+    font-size: 1.1rem;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Navbar */
+.nav-wrapper .brand-logo {
+    font-size: 1.8rem !important;
+    font-weight: 300;
+}
+
+.nav-wrapper .brand-logo i {
+    font-size: 1.8rem;
+}
+
+/* Mensagens */
+#message {
+    border-radius: 10px;
+    margin-top: 20px;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading */
+.progress {
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Links */
+a {
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* Collection items */
+.collection .collection-item {
+    border-radius: 5px;
+    margin-bottom: 5px;
+    border: none;
+    background-color: #f8f9fa;
+}
+
+/* Footer */
+.page-footer {
+    margin-top: 50px;
+}
+
+/* Responsividade */
+@media only screen and (max-width: 600px) {
+    .container {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 95%;
+    }
+
+    .card {
+        margin: 10px 5px;
+        border-radius: 10px;
+    }
+
+    .nav-wrapper .brand-logo {
+        font-size: 1.4rem !important;
+        left: 10px !important;
+    }
+
+    .nav-wrapper .brand-logo i {
+        font-size: 1.4rem;
+    }
+
+    .btn-large {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .nav-wrapper .brand-logo {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Animações extras */
+.card {
+    animation: fadeInUp 0.6s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estados dos botões */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn.loading {
+    position: relative;
+    color: transparent;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Toast customizado */
+.toast {
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+/* Helper text melhorado */
+.helper-text {
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+/* Ícones melhorados */
+.material-icons.tiny {
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+.material-icons.small {
+    font-size: 1.5rem;
+}
+
+.material-icons.medium {
+    font-size: 3rem;
+}
+
+/* Efeitos de hover personalizados */
+.collection-item:hover {
+    background-color: #e3f2fd !important;
+    transition: background-color 0.3s ease;
+}
+
+/* Scrollbar customizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

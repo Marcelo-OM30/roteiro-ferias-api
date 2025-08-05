@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Roteiro de Férias</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/roteiro-style.css">
+</head>
+
+<body>
+    <div class="container fade-in-up">
+        <div class="welcome-message">
+            <h1>
+                <i class="material-icons"
+                    style="font-size: 1.5em; vertical-align: middle; margin-right: 12px;">admin_panel_settings</i>
+                Área Administrativa
+            </h1>
+            <p>Painel de controle do sistema de roteiro de férias</p>
+        </div>
+
+        <div class="user-info">
+            <p><strong>Usuário:</strong> <span id="username">admin</span></p>
+            <p><strong>Nível de acesso:</strong> <span style="color: #4caf50; font-weight: 600;">Administrador</span>
+            </p>
+            <p><strong>Permissões:</strong> Acesso total ao sistema</p>
+        </div>
+
+        <div class="stats-card">
+            <p class="number" id="totalUsers">156</p>
+            <p class="label">Usuários Cadastrados</p>
+        </div>
+
+        <div class="admin-actions">
+            <h3>
+                <i class="material-icons" style="vertical-align: middle; margin-right: 8px;">settings</i>
+                Ações Administrativas
+            </h3>
+
+            <div class="admin-buttons">
+                <button class="btn" onclick="gerenciarUsuarios()">
+                    <i class="material-icons">people</i>
+                    Gerenciar Usuários
+                </button>
+
+                <button class="btn" onclick="gerenciarRoteiros()">
+                    <i class="material-icons">map</i>
+                    Gerenciar Roteiros
+                </button>
+
+                <button class="btn" onclick="verRelatorios()">
+                    <i class="material-icons">analytics</i>
+                    Ver Relatórios
+                </button>
+
+                <button class="btn btn-secondary" onclick="configuracoes()">
+                    <i class="material-icons">tune</i>
+                    Configurações
+                </button>
+
+                <button class="btn btn-secondary" onclick="window.open('/public-trips', '_blank')">
+                    <i class="material-icons">public</i>
+                    Ver Área Pública
+                </button>
+
+                <button class="btn" onclick="backupSistema()">
+                    <i class="material-icons">backup</i>
+                    Backup do Sistema
+                </button>
+            </div>
+        </div>
+
+        <h2>Roteiros Populares</h2>
+        <div class="roteiros-grid">
+            <div class="roteiro-card">
+                <h3>
+                    <i class="material-icons">beach_access</i>
+                    Praias do Nordeste
+                </h3>
+                <p>Roteiro completo pelas mais belas praias do nordeste brasileiro, incluindo Maceió, Porto de Galinhas
+                    e Jericoacoara.</p>
+            </div>
+
+            <div class="roteiro-card">
+                <h3>
+                    <i class="material-icons">terrain</i>
+                    Serra da Mantiqueira
+                </h3>
+                <p>Aventura pelas montanhas da Mantiqueira, passando por Campos do Jordão, Monte Verde e Visconde de
+                    Mauá.</p>
+            </div>
+
+            <div class="roteiro-card">
+                <h3>
+                    <i class="material-icons">location_city</i>
+                    Cidades Históricas
+                </h3>
+                <p>Tour pelas cidades históricas de Minas Gerais: Ouro Preto, Tiradentes, São João del-Rei e Mariana.
+                </p>
+            </div>
+
+            <div class="roteiro-card">
+                <h3>
+                    <i class="material-icons">nature</i>
+                    Pantanal
+                </h3>
+                <p>Experiência única no Pantanal sul-mato-grossense, com observação da fauna e flora local.</p>
+            </div>
+        </div>
+
+        <div class="logout-area">
+            <button class="btn btn-danger" onclick="authService.logout(); return false;">
+                <i class="material-icons">logout</i>
+                Sair do Sistema
+            </button>
+        </div>
+    </div>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('username').textContent = username;
+        }
+
+        function gerenciarUsuarios() {
+            alert('🚧 Funcionalidade em desenvolvimento!\n\nEm breve você poderá:\n• Criar novos usuários\n• Editar permissões\n• Visualizar logs de acesso');
+        }
+
+        function gerenciarRoteiros() {
+            alert('🚧 Funcionalidade em desenvolvimento!\n\nEm breve você poderá:\n• Criar roteiros personalizados\n• Editar destinos\n• Gerenciar preços e disponibilidade');
+        }
+
+        function verRelatorios() {
+            alert('📊 Relatórios do Sistema\n\n• Usuários ativos: 156\n• Roteiros criados: 24\n• Acessos hoje: 89\n• Média de satisfação: 4.8/5');
+        }
+
+        function configuracoes() {
+            alert('⚙️ Configurações do Sistema\n\nEm breve você poderá ajustar:\n• Configurações de email\n• Parâmetros de segurança\n• Personalização da interface');
+        }
+
+        function backupSistema() {
+            if (confirm('💾 Deseja realizar backup do sistema?\n\nIsso pode levar alguns minutos.')) {
+                alert('✅ Backup iniciado!\n\nVocê receberá uma notificação quando estiver concluído.');
+            }
+        }
+
+        function atualizarEstatisticas() {
+            const totalUsers = document.getElementById('totalUsers');
+            let count = 0;
+            const target = 156;
+            const increment = target / 50;
+
+            const timer = setInterval(() => {
+                count += increment;
+                if (count >= target) {
+                    count = target;
+                    clearInterval(timer);
+                }
+                totalUsers.textContent = Math.floor(count);
+            }, 30);
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(atualizarEstatisticas, 500);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roteiros Públicos - Roteiro de Férias</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/roteiro-style.css">
+</head>
+
+<body>
+    <div class="container fade-in-up">
+        <div class="welcome-message">
+            <h1>
+                <i class="material-icons"
+                    style="font-size: 1.5em; vertical-align: middle; margin-right: 12px;">explore</i>
+                Roteiros de Viagem
+            </h1>
+            <p>Descubra destinos incríveis e planeje sua próxima aventura</p>
+        </div>
+
+        <div class="user-info">
+            <p><strong>Usuário:</strong> <span id="username">usuário</span></p>
+            <p><strong>Nível de acesso:</strong> <span style="color: #4caf50; font-weight: 600;">Usuário</span></p>
+            <p><strong>Status:</strong> Explore nossos roteiros e descubra novos destinos!</p>
+        </div>
+
+        <div class="stats-card">
+            <p class="number">4.9</p>
+            <p class="label">Avaliação Média dos Roteiros</p>
+        </div>
+
+        <h2>
+            <i class="material-icons" style="vertical-align: middle; margin-right: 8px;">map</i>
+            Roteiros Disponíveis
+        </h2>
+
+        <div class="roteiros-grid">
+            <div class="roteiro-card">
+                <h3>
+                    <i class="material-icons">beach_access</i>
+                    Praias do Brasil
+                </h3>
+                <p><strong>Duração:</strong> 7 dias</p>
+                <p><strong>Destinos:</strong> Maceió, Porto de Galinhas, Recife</p>
+                <p>Descubra as mais belas praias brasileiras em um roteiro completo pelo nordeste. Inclui hospedagem,
+                    passeios e transfers.</p>
+                <div style="margin-top: 16px;">
+                    <button class="btn" onclick="verDetalhes('praias')">
+                        <i class="material-icons">visibility</i>
+                        Ver Detalhes
+                    </button>
+                </div>
+            </div>
+
+            <div class="roteiro-card">
+                <h3>
+                    <i class="material-icons">terrain</i>
+                    Montanhas e Serras
+                </h3>
+                <p><strong>Duração:</strong> 5 dias</p>
+                <p><strong>Destinos:</strong> Campos do Jordão, Monte Verde</p>
+                <p>Aventuras em destinos montanhosos com clima agradável, trilhas ecológicas e gastronomia típica da
+                    região serrana.</p>
+                <div style="margin-top: 16px;">
+                    <button class="btn" onclick="verDetalhes('montanhas')">
+                        <i class="material-icons">visibility</i>
+                        Ver Detalhes
+                    </button>
+                </div>
+            </div>
+
+            <div class="roteiro-card">
+                <h3>
+                    <i class="material-icons">location_city</i>
+                    Cidades Históricas
+                </h3>
+                <p><strong>Duração:</strong> 4 dias</p>
+                <p><strong>Destinos:</strong> Ouro Preto, Tiradentes</p>
+                <p>Mergulhe na história do Brasil colonial visitando as mais importantes cidades históricas de Minas
+                    Gerais.</p>
+                <div style="margin-top: 16px;">
+                    <button class="btn" onclick="verDetalhes('historicas')">
+                        <i class="material-icons">visibility</i>
+                        Ver Detalhes
+                    </button>
+                </div>
+            </div>
+
+            <div class="roteiro-card">
+                <h3>
+                    <i class="material-icons">nature</i>
+                    Ecoturismo
+                </h3>
+                <p><strong>Duração:</strong> 6 dias</p>
+                <p><strong>Destinos:</strong> Pantanal, Bonito</p>
+                <p>Experiência única de contato com a natureza, observação da fauna e flora em um dos biomas mais ricos
+                    do mundo.</p>
+                <div style="margin-top: 16px;">
+                    <button class="btn" onclick="verDetalhes('ecoturismo')">
+                        <i class="material-icons">visibility</i>
+                        Ver Detalhes
+                    </button>
+                </div>
+            </div>
+
+            <div class="roteiro-card">
+                <h3>
+                    <i class="material-icons">local_dining</i>
+                    Turismo Gastronômico
+                </h3>
+                <p><strong>Duração:</strong> 3 dias</p>
+                <p><strong>Destinos:</strong> São Paulo, Belo Horizonte</p>
+                <p>Tour gastronômico pelas capitais, experimentando a culinária local, mercados tradicionais e
+                    restaurantes renomados.</p>
+                <div style="margin-top: 16px;">
+                    <button class="btn" onclick="verDetalhes('gastronomico')">
+                        <i class="material-icons">visibility</i>
+                        Ver Detalhes
+                    </button>
+                </div>
+            </div>
+
+            <div class="roteiro-card">
+                <h3>
+                    <i class="material-icons">sports_soccer</i>
+                    Turismo Esportivo
+                </h3>
+                <p><strong>Duração:</strong> 4 dias</p>
+                <p><strong>Destinos:</strong> Rio de Janeiro, São Paulo</p>
+                <p>Visite estádios históricos, museus do futebol e acompanhe jogos dos principais campeonatos
+                    brasileiros.</p>
+                <div style="margin-top: 16px;">
+                    <button class="btn" onclick="verDetalhes('esportivo')">
+                        <i class="material-icons">visibility</i>
+                        Ver Detalhes
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-actions">
+            <h3>
+                <i class="material-icons" style="vertical-align: middle; margin-right: 8px;">tips_and_updates</i>
+                Dicas de Viagem
+            </h3>
+
+            <div class="roteiro-card" style="margin: 0;">
+                <h3>💡 Planeje sua Viagem</h3>
+                <ul style="margin: 0; padding-left: 20px;">
+                    <li>Reserve com antecedência para melhores preços</li>
+                    <li>Verifique a documentação necessária</li>
+                    <li>Contrate seguro viagem</li>
+                    <li>Pesquise sobre o clima da região</li>
+                    <li>Faça uma lista de itens essenciais</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="logout-area">
+            <button class="btn btn-danger" onclick="authService.logout(); return false;">
+                <i class="material-icons">logout</i>
+                Sair
+            </button>
+        </div>
+    </div>
+
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        const username = localStorage.getItem('username');
+        if (username) {
+            document.getElementById('username').textContent = username;
+        }
+
+        // Função para ver detalhes dos roteiros
+        function verDetalhes(roteiro) {
+            const roteiros = {
+                'praias': {
+                    nome: 'Praias do Brasil',
+                    detalhes: '🏖️ Roteiro Completo\n\n📍 Destinos:\n• Maceió (2 dias)\n• Porto de Galinhas (2 dias)\n• Recife (3 dias)\n\n🏨 Inclui:\n• Hospedagem em hotéis 4 estrelas\n• Café da manhã\n• Transfers aeroporto\n• Passeios às piscinas naturais\n\n💰 Valor: R$ 2.890 por pessoa'
+                },
+                'montanhas': {
+                    nome: 'Montanhas e Serras',
+                    detalhes: '🏔️ Aventura na Serra\n\n📍 Destinos:\n• Campos do Jordão (3 dias)\n• Monte Verde (2 dias)\n\n🏨 Inclui:\n• Hospedagem em pousadas charmosas\n• Café da manhã\n• Passeios ecológicos\n• Degustação de vinhos\n\n💰 Valor: R$ 1.890 por pessoa'
+                },
+                'historicas': {
+                    nome: 'Cidades Históricas',
+                    detalhes: '🏛️ História do Brasil\n\n📍 Destinos:\n• Ouro Preto (2 dias)\n• Tiradentes (2 dias)\n\n🏨 Inclui:\n• Hospedagem em casarões históricos\n• Café da manhã\n• Guias especializados\n• Visitas a museus\n\n💰 Valor: R$ 1.590 por pessoa'
+                },
+                'ecoturismo': {
+                    nome: 'Ecoturismo',
+                    detalhes: '🌿 Natureza Exuberante\n\n📍 Destinos:\n• Pantanal (4 dias)\n• Bonito (2 dias)\n\n🏨 Inclui:\n• Hospedagem em fazendas\n• Pensão completa\n• Safáris fotográficos\n• Flutuação em rios cristalinos\n\n💰 Valor: R$ 3.290 por pessoa'
+                },
+                'gastronomico': {
+                    nome: 'Turismo Gastronômico',
+                    detalhes: '🍽️ Sabores do Brasil\n\n📍 Destinos:\n• São Paulo (2 dias)\n• Belo Horizonte (1 dia)\n\n🏨 Inclui:\n• Hospedagem em hotéis centrais\n• Café da manhã\n• Jantares em restaurantes renomados\n• Tour pelos mercados locais\n\n💰 Valor: R$ 2.190 por pessoa'
+                },
+                'esportivo': {
+                    nome: 'Turismo Esportivo',
+                    detalhes: '⚽ Paixão Nacional\n\n📍 Destinos:\n• Rio de Janeiro (2 dias)\n• São Paulo (2 dias)\n\n🏨 Inclui:\n• Hospedagem próxima aos estádios\n• Café da manhã\n• Ingressos para jogos\n• Tour pelos estádios históricos\n\n💰 Valor: R$ 1.790 por pessoa'
+                }
+            };
+
+            const roteiroInfo = roteiros[roteiro];
+            if (roteiroInfo) {
+                alert(roteiroInfo.detalhes);
+            }
+        }
+
+        // Animação de entrada dos cards
+        function animarCards() {
+            const cards = document.querySelectorAll('.roteiro-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
+
+        // Inicializar animações quando a página carregar
+        window.addEventListener('load', () => {
+            setTimeout(animarCards, 300);
+        });
+
+        // Efeito hover nos cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.roteiro-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-4px) scale(1.02)';
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
