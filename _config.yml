@@ -1,0 +1,27 @@
+name: Roteiro de Férias Test Report
+baseurl: ""
+url: "https://marcelo-om30.github.io"
+
+markdown: kramdown
+highlighter: rouge
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+theme: minima
+
+title: "🧪 Roteiro de Férias - Test Reports"
+description: "Relatórios automatizados dos testes do sistema de roteiro de férias"
+author: "Marcelo OM30"
+
+header_pages:
+  - index.html
+
+exclude:
+  - node_modules/
+  - package*.json
+  - cypress.config.js
+  - server.js
+  - README.md
+  - .gitignore

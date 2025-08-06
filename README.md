@@ -1,5 +1,9 @@
 # Roteiro de Férias - Aplicação Web Integrada
 
+[![Test and Deploy](https://github.com/Marcelo-OM30/testApi/actions/workflows/test-and-deploy.yml/badge.svg)](https://github.com/Marcelo-OM30/testApi/actions/workflows/test-and-deploy.yml)
+[![GitHub Pages](https://img.shields.io/badge/Reports-GitHub%20Pages-blue?style=flat&logo=github)](https://marcelo-om30.github.io/roteiro-ferias-app/)
+[![Cypress Tests](https://img.shields.io/badge/Tests-Cypress-brightgreen?style=flat&logo=cypress)](https://marcelo-om30.github.io/roteiro-ferias-app/mochawesome.html)
+
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)
 ![MaterializeCSS](https://img.shields.io/badge/MaterializeCSS-ee6e73?style=for-the-badge&logo=material-design&logoColor=white)
@@ -158,6 +162,54 @@ roteiro-ferias-app/
 - `npm run dev`: Inicia o servidor com nodemon (desenvolvimento)
 - `npm test`: Executa testes Cypress em modo headless
 - `npm run test:open`: Abre interface gráfica do Cypress
+- `npm run test:ci`: Executa testes em modo CI/CD
+- `npm run test:clean`: Limpa relatórios anteriores
+- `npm run wait-for-server`: Aguarda servidor estar disponível
+- `npm run health-check`: Verifica status do servidor
+
+## 🚀 CI/CD com GitHub Actions
+
+### Pipeline Automatizada
+Este projeto possui uma pipeline completa no GitHub Actions que:
+
+- ✅ **Executa testes automaticamente** em push/PR
+- ✅ **Gera relatórios Mochawesome** com resultados detalhados  
+- ✅ **Publica no GitHub Pages** com dashboard personalizado
+- ✅ **Testa em múltiplas versões do Node.js** (18, 20)
+- ✅ **Salva artefatos** (screenshots, vídeos, relatórios)
+
+### 📊 Acesso aos Relatórios
+- **Dashboard**: https://marcelo-om30.github.io/roteiro-ferias-app/
+- **Relatório Completo**: https://marcelo-om30.github.io/roteiro-ferias-app/mochawesome.html
+
+### 🔄 Triggers da Pipeline
+```yaml
+# Push na branch main
+git push origin main
+
+# Pull Request para main  
+gh pr create --title "Feature" --body "Descrição"
+
+# Execução manual
+# Via interface do GitHub Actions
+```
+
+### 📈 Métricas Coletadas
+- Número total de testes executados
+- Taxa de sucesso/falha dos testes  
+- Tempo de execução da pipeline
+- Screenshots de falhas (se houver)
+- Vídeos completos dos testes
+- Logs detalhados de cada step
+
+### ⚙️ Configuração Local para CI
+```bash
+# Simular pipeline localmente
+npm run test:clean
+npm start &
+npm run wait-for-server  
+npm run test:ci
+```
 
 ## 🌐 Endpoints
 

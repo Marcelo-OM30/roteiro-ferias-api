@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Relatórios automatizados dos testes do sistema Roteiro de Férias">
+    <meta name="keywords" content="cypress, testes, roteiro, férias, automatização, ci/cd">
+    <meta name="author" content="Marcelo OM30">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Test Reports - Roteiro de Férias">
+    <meta property="og:description" content="Relatórios automatizados dos testes">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marcelo-om30.github.io/roteiro-ferias-app/">
+    
+    <title>🧪 Test Reports - Roteiro de Férias</title>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 500px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            background: linear-gradient(45deg, #26a69a, #1a3c5d);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test Reports</h1>
+        <p>Relatórios automatizados do sistema Roteiro de Férias</p>
+        
+        <div class="status">
+            <strong>Status:</strong> Redirecionando...
+        </div>
+        
+        <a href="./index.html" class="btn">📊 Ver Dashboard</a>
+        <a href="./mochawesome.html" class="btn">📄 Relatório Detalhado</a>
+    </div>
+    
+    <script>
+        // Redirecionar automaticamente após 3 segundos
+        setTimeout(() => {
+            window.location.href = './index.html';
+        }, 3000);
+    </script>
+</body>
+</html>

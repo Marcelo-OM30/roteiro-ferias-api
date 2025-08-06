@@ -171,10 +171,6 @@ class AuthService {
         }
     }
 
-    /**
-     * Obtém token de autenticação
-     * @returns {string|null} Token ou null
-     */
     getToken() {
         return localStorage.getItem(this.tokenKey);
     }

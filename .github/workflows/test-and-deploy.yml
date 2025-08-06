@@ -1,0 +1,188 @@
+name: 🧪 Test and Deploy Report
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  test:
+    name: 🚀 Run Tests
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18, 20]
+    
+    steps:
+      - name: 📋 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: 🔧 Install dependencies
+        run: npm ci
+
+      - name: 🧹 Clean previous reports
+        run: npm run test:clean
+
+      - name: 🚀 Start application server
+        run: |
+          npm start &
+          npm run wait-for-server
+
+      - name: 🧪 Run Cypress tests
+        run: npm run test:ci
+
+      - name: 📂 Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-reports-node-${{ matrix.node-version }}
+          path: |
+            cypress/reports/mochawesome/
+            cypress/screenshots/
+            cypress/videos/
+          retention-days: 30
+
+  deploy-pages:
+    name: 📄 Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: 📋 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 🔧 Install dependencies
+        run: npm ci
+
+      - name: 🧹 Clean previous reports
+        run: npm run test:clean
+
+      - name: 🚀 Start application server
+        run: |
+          npm start &
+          npm run wait-for-server
+
+      - name: 🧪 Run tests for Pages
+        run: npm run test:ci
+
+      - name: 📁 Prepare Pages content
+        run: |
+          mkdir -p _site
+          cp -r cypress/reports/mochawesome/* _site/
+          
+          # Copy custom template
+          cp .github/templates/index.html _site/
+          
+          # Replace placeholders in template
+          sed -i "s/{{GITHUB_REPOSITORY}}/${{ github.repository }}/g" _site/index.html
+          sed -i "s/{{BUILD_DATE}}/$(date -u '+%Y-%m-%d %H:%M:%S UTC')/g" _site/index.html
+          sed -i "s/{{GITHUB_REF}}/${{ github.ref_name }}/g" _site/index.html
+          sed -i "s/{{GITHUB_SHA}}/${{ github.sha }}/g" _site/index.html
+          sed -i "s/{{GITHUB_WORKFLOW}}/${{ github.workflow }}/g" _site/index.html
+          
+          # Create a comprehensive README for the Pages site
+          cat > _site/README.md << 'EOF'
+          # 🧪 Test Reports - Roteiro de Férias
+          
+          ## 📊 Última Execução
+          - **Data**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          - **Branch**: ${{ github.ref_name }}
+          - **Commit**: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+          - **Workflow**: ${{ github.workflow }}
+          
+          ## 🔗 Links Úteis
+          - [📄 Relatório Interativo](./index.html)
+          - [📊 Relatório Mochawesome](./mochawesome.html)
+          - [📂 Repositório](https://github.com/${{ github.repository }})
+          - [⚙️ GitHub Actions](https://github.com/${{ github.repository }}/actions)
+          
+          ## 📈 Status dos Testes
+          Os testes são executados automaticamente a cada:
+          - Push na branch main
+          - Pull Request para main
+          - Execução manual via workflow_dispatch
+          
+          ### 🧪 Cenários de Teste
+          1. **Login Scenarios**: Testa autenticação, bloqueio e recuperação de senha
+          2. **API Integration**: Valida comunicação com backend
+          3. **UI Interactions**: Verifica comportamento da interface
+          4. **Error Handling**: Testa tratamento de erros
+          
+          ### 📱 Compatibilidade
+          - ✅ Chrome (Headless)
+          - ✅ Firefox
+          - ✅ Edge
+          - ✅ Mobile Viewports
+          
+          ---
+          
+          **Gerado automaticamente em**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          EOF
+
+      - name: 🔧 Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: 📤 Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  notify:
+    name: 📢 Notify Results
+    runs-on: ubuntu-latest
+    needs: [test, deploy-pages]
+    if: always()
+    
+    steps:
+      - name: 📋 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 💬 Create summary
+        run: |
+          echo "## 🧪 Test Results Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Job | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Tests | ${{ needs.test.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Deploy | ${{ needs.deploy-pages.result == 'success' && '✅ Deployed' || needs.deploy-pages.result == 'skipped' && '⏭️ Skipped' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📊 Report Links" >> $GITHUB_STEP_SUMMARY
+          echo "- [View Test Report](https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Repository](https://github.com/${{ github.repository }})" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Triggered by:** ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
