@@ -16,6 +16,7 @@
         "test:clean": "rm -rf cypress/reports/mochawesome && mkdir -p cypress/reports/mochawesome",
         "test:full": "npm run test:clean && npm run test",
         "test:ci": "npm run test:clean && npm run test:run && npm run test:merge && npm run test:generate",
+        "test:trigger-pipeline": "echo '🚀 Triggering GitHub Actions pipeline...' && git add . && git commit -m 'trigger: Executa pipeline de testes' --allow-empty && git push origin main",
         "start:ci": "node server.js &",
         "health-check": "curl -f http://localhost:3000/health || exit 1",
         "wait-for-server": "npx wait-on http://localhost:3000/health --timeout 30000",

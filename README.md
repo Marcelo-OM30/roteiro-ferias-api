@@ -158,46 +158,79 @@ roteiro-ferias-app/
 
 ## 🔧 Scripts Disponíveis
 
+### 🚀 Execução Local
 - `npm start`: Inicia o servidor de produção
 - `npm run dev`: Inicia o servidor com nodemon (desenvolvimento)
-- `npm test`: Executa testes Cypress em modo headless
-- `npm run test:open`: Abre interface gráfica do Cypress
-- `npm run test:ci`: Executa testes em modo CI/CD
-- `npm run test:clean`: Limpa relatórios anteriores
-- `npm run wait-for-server`: Aguarda servidor estar disponível
 - `npm run health-check`: Verifica status do servidor
+- `npm run wait-for-server`: Aguarda servidor estar disponível
+
+### 🧪 Testes Automatizados
+- `npm test`: Executa testes Cypress em modo headless com relatório
+- `npm run test:open`: Abre interface gráfica do Cypress para desenvolvimento
+- `npm run test:run`: Executa apenas os testes (sem relatório)
+- `npm run test:ci`: Executa testes em modo CI/CD (sem abrir relatório)
+- `npm run test:clean`: Limpa relatórios anteriores
+- `npm run test:full`: Limpa + testa + gera relatório completo
+
+### 🔄 Pipeline e Deploy
+- `npm run test:trigger-pipeline`: **Dispara execução da pipeline GitHub Actions**
+  ```bash
+  # Executa automaticamente:
+  # 1. git add .
+  # 2. git commit --allow-empty
+  # 3. git push origin main
+  # 4. Triggers GitHub Actions workflow
+  ```
 
 ## 🚀 CI/CD com GitHub Actions
 
-### Pipeline Automatizada
+### 🎯 Pipeline Automatizada
 Este projeto possui uma pipeline completa no GitHub Actions que:
 
-- ✅ **Executa testes automaticamente** em push/PR
-- ✅ **Gera relatórios Mochawesome** com resultados detalhados  
-- ✅ **Publica no GitHub Pages** com dashboard personalizado
-- ✅ **Testa em múltiplas versões do Node.js** (18, 20)
-- ✅ **Salva artefatos** (screenshots, vídeos, relatórios)
+- ✅ **Executa 10 cenários de teste** automaticamente em push/PR
+- ✅ **Gera relatórios Mochawesome** com resultados detalhados e estatísticas
+- ✅ **Publica no GitHub Pages** com dashboard personalizado em horário brasileiro
+- ✅ **Testa em múltiplas versões** do Node.js (18, 20) para compatibilidade
+- ✅ **Salva artefatos** (screenshots, vídeos, relatórios) por 30 dias
+- ✅ **Deploy automático** do relatório em Pages após sucesso dos testes
 
 ### 📊 Acesso aos Relatórios
-- **Dashboard**: https://marcelo-om30.github.io/roteiro-ferias-app/
-- **Relatório Completo**: https://marcelo-om30.github.io/roteiro-ferias-app/mochawesome.html
+- **🏠 Dashboard Principal**: [Test Reports Dashboard](https://marcelo-om30.github.io/roteiro-ferias-api/)
+- **📈 Relatório Completo**: [Mochawesome Report](https://marcelo-om30.github.io/roteiro-ferias-api/merged-report.html)
+- **🔧 GitHub Actions**: [Pipeline Status](https://github.com/Marcelo-OM30/roteiro-ferias-api/actions)
 
-### 🔄 Triggers da Pipeline
-```yaml
-# Push na branch main
-git push origin main
+### 🔄 Como Disparar a Pipeline
 
-# Pull Request para main  
-gh pr create --title "Feature" --body "Descrição"
-
-# Execução manual
-# Via interface do GitHub Actions
+#### 1. **Método Automatizado** (Recomendado)
+```bash
+# Comando único que faz tudo
+npm run test:trigger-pipeline
 ```
 
-### 📈 Métricas Coletadas
-- Número total de testes executados
-- Taxa de sucesso/falha dos testes  
-- Tempo de execução da pipeline
+#### 2. **Método Manual**
+```bash
+# Push na branch main
+git add .
+git commit -m "trigger: Executa testes na pipeline" --allow-empty
+git push origin main
+```
+
+#### 3. **Via Interface GitHub**
+- Acesse: `Actions` → `🧪 Test and Deploy` → `Run workflow`
+
+#### 4. **Pull Request**
+```bash
+# Automaticamente executa em PRs
+gh pr create --title "Feature: Nova funcionalidade" --body "Descrição"
+```
+
+### 📈 Métricas e Relatórios
+- ✅ **10 cenários de teste** executados automaticamente
+- 📊 **Taxa de sucesso**: 100% (10/10 testes passando)
+- ⏱️ **Tempo de execução**: ~2-3 minutos
+- 🗓️ **Horário brasileiro**: Timestamps em BRT (UTC-3)
+- 📱 **Layout responsivo**: Dashboard funciona em mobile
+- 🔄 **Execução contínua**: A cada push na branch main
 - Screenshots de falhas (se houver)
 - Vídeos completos dos testes
 - Logs detalhados de cada step
