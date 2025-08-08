@@ -14,7 +14,7 @@
 
 ## 🎯 Sobre o Projeto
 
-Esta é uma aplicação web desenvolvida para o **Desafio Universitário** que demonstra a integração completa entre um frontend moderno e uma API REST de autenticação. O projeto consome a API de login desenvolvida no desafio anterior, implementando uma interface elegante e testes automatizados.
+Esta é uma aplicação web desenvolvida para o **Desafio Mentoria 2.0** que demonstra a integração completa entre um frontend moderno e uma API REST de autenticação. O projeto consome a API de login desenvolvida no desafio anterior, implementando uma interface elegante e testes automatizados.
 
 ### 🏗️ Arquitetura
 
