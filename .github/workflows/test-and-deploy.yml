@@ -102,14 +102,14 @@ jobs:
           cp .github/templates/index.html _site/
           
           sed -i "s|{{GITHUB_REPOSITORY}}|${{ github.repository }}|g" _site/index.html
-          sed -i "s|{{BUILD_DATE}}|$(date -u '+%Y-%m-%d %H:%M:%S UTC')|g" _site/index.html
+          sed -i "s|{{BUILD_DATE}}|$(TZ='America/Sao_Paulo' date '+%d/%m/%Y %H:%M:%S BRT')|g" _site/index.html
           sed -i "s|{{GITHUB_REF}}|${{ github.ref_name }}|g" _site/index.html
           sed -i "s|{{GITHUB_SHA}}|${{ github.sha }}|g" _site/index.html
           sed -i "s|{{GITHUB_WORKFLOW}}|${{ github.workflow }}|g" _site/index.html
           
           echo "# Test Reports - Roteiro de Férias" > _site/README.md
           echo "" >> _site/README.md
-          echo "Relatórios automatizados gerados em: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> _site/README.md
+          echo "Relatórios automatizados gerados em: $(TZ='America/Sao_Paulo' date '+%d/%m/%Y %H:%M:%S BRT')" >> _site/README.md
           echo "Branch: ${{ github.ref_name }}" >> _site/README.md
           echo "Commit: ${{ github.sha }}" >> _site/README.md
 

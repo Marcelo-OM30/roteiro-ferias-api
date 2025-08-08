@@ -178,25 +178,34 @@
         
         .meta-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
         }
         
         .meta-item {
             display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #e0e0e0;
+            flex-direction: column;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #26a69a;
         }
         
         .meta-label {
             font-weight: 600;
             color: #555;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .meta-value {
             color: #333;
             font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            word-break: break-all;
+            padding: 5px 0;
         }
         
         @media (max-width: 768px) {
@@ -205,6 +214,9 @@
             .content { padding: 20px; }
             .nav ul { flex-direction: column; gap: 10px; }
             .stats { grid-template-columns: 1fr; }
+            .meta-grid { grid-template-columns: 1fr; }
+            .meta-item { padding: 12px; }
+            .meta-value { font-size: 0.85em; }
         }
         
         .footer {
@@ -250,7 +262,7 @@
         <nav class="nav">
             <ul>
                 <li><a href="#"><i class="material-icons">dashboard</i> Dashboard</a></li>
-                <li><a href="./mochawesome.html"><i class="material-icons">assessment</i> Relatório Completo</a></li>
+                <li><a href="./merged-report.html"><i class="material-icons">assessment</i> Relatório Completo</a></li>
                 <li><a href="https://github.com/{{GITHUB_REPOSITORY}}"><i class="material-icons">code</i> Repositório</a></li>
                 <li><a href="https://github.com/{{GITHUB_REPOSITORY}}/actions"><i class="material-icons">build</i> Actions</a></li>
             </ul>
@@ -303,7 +315,7 @@
                 Carregando relatório...
             </div>
             
-            <iframe class="report-frame" id="reportFrame" src="./mochawesome.html" style="display: none;" onload="handleFrameLoad()"></iframe>
+            <iframe class="report-frame" id="reportFrame" src="./merged-report.html" style="display: none;" onload="handleFrameLoad()"></iframe>
         </main>
         
         <footer class="footer">
@@ -317,17 +329,30 @@
             const frame = document.getElementById('reportFrame');
             
             setTimeout(() => {
-                loading.style.display = 'none';
-                frame.style.display = 'block';
-                
                 try {
+                    // Verificar se o iframe carregou com sucesso
                     const frameDoc = frame.contentDocument || frame.contentWindow.document;
-                    const stats = extractStatsFromReport(frameDoc);
-                    updateStats(stats);
+                    
+                    if (frameDoc && frameDoc.title !== 'Error 404 - Not Found') {
+                        loading.style.display = 'none';
+                        frame.style.display = 'block';
+                        
+                        const stats = extractStatsFromReport(frameDoc);
+                        updateStats(stats);
+                    } else {
+                        throw new Error('Relatório não encontrado');
+                    }
                 } catch (e) {
-                    console.log('Não foi possível extrair estatísticas do relatório');
+                    console.log('Erro ao carregar relatório:', e.message);
+                    loading.innerHTML = `
+                        <div style="text-align: center; color: #f44336;">
+                            <i class="material-icons" style="font-size: 48px; margin-bottom: 10px;">error_outline</i>
+                            <p>Relatório não encontrado ou ainda sendo gerado.</p>
+                            <p><a href="./merged-report.html" target="_blank" style="color: #26a69a;">Tentar abrir diretamente</a></p>
+                        </div>
+                    `;
                 }
-            }, 1000);
+            }, 2000);
         }
         
         function extractStatsFromReport(doc) {
@@ -360,11 +385,35 @@
         
         window.addEventListener('load', () => {
             setTimeout(() => {
-                if (document.getElementById('reportFrame').style.display === 'none') {
-                    document.getElementById('loadingIndicator').innerHTML = 
-                        '<div class="spinner"></div>Carregando relatório completo...';
+                const frame = document.getElementById('reportFrame');
+                const loading = document.getElementById('loadingIndicator');
+                
+                if (frame.style.display === 'none') {
+                    loading.innerHTML = `
+                        <div style="text-align: center; color: #ff9800;">
+                            <div class="spinner"></div>
+                            <p>Carregando relatório completo...</p>
+                            <p><small>Se demorar muito, <a href="./merged-report.html" target="_blank" style="color: #26a69a;">clique aqui</a></small></p>
+                        </div>
+                    `;
                 }
-            }, 2000);
+            }, 3000);
+            
+            // Timeout final - se não carregar em 10 segundos, mostra erro
+            setTimeout(() => {
+                const frame = document.getElementById('reportFrame');
+                const loading = document.getElementById('loadingIndicator');
+                
+                if (frame.style.display === 'none') {
+                    loading.innerHTML = `
+                        <div style="text-align: center; color: #f44336;">
+                            <i class="material-icons" style="font-size: 48px; margin-bottom: 10px;">error_outline</i>
+                            <p>Tempo limite excedido ao carregar o relatório.</p>
+                            <p><a href="./merged-report.html" target="_blank" style="color: #26a69a; font-weight: bold;">Abrir Relatório Diretamente</a></p>
+                        </div>
+                    `;
+                }
+            }, 10000);
         });
     </script>
 </body>
