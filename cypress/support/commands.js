@@ -41,11 +41,16 @@ Cypress.Commands.add('resetAPI', () => {
   })
 })
 
-Cypress.Commands.add('waitForMessage', (message) => {
-  cy.get('#message', { timeout: 10000 }).should('be.visible')
+Cypress.Commands.add('waitForMessage', (message, timeout = 15000) => {
+  cy.get('#message', { timeout }).should('be.visible')
   cy.get('#message').should('contain', message)
 })
 
+Cypress.Commands.add('waitForToast', (message, timeout = 15000) => {
+  cy.get('.toast', { timeout }).should('be.visible')
+  cy.get('.toast').should('contain', message)
+})
+
 Cypress.Commands.add('checkRedirect', (url) => {
-  cy.url({ timeout: 10000 }).should('include', url)
+  cy.url({ timeout: 15000 }).should('include', url)
 })

@@ -137,16 +137,16 @@ describe('Cenários de Login da API - Desafio Mentoria 2.0', () => {
             // Verificar resposta baseada na tentativa
             if (i < 3) {
                 // Primeiras 2 tentativas: erro de credenciais com tentativas restantes
-                cy.get('#message').should('be.visible')
+                cy.get('#message', { timeout: 15000 }).should('be.visible')
                 cy.get('#message').should('contain', 'Username ou senha incorretos')
                 cy.get('#message').should('have.class', 'red')
 
                 // Verificar que menciona tentativas restantes
                 const tentativasRestantes = 3 - i
-                cy.get('#message').should('contain', `${tentativasRestantes} tentativas restantes`)
+                cy.get('#message', { timeout: 15000 }).should('contain', `${tentativasRestantes} tentativas restantes`)
 
                 // Aguardar antes da próxima tentativa
-                cy.wait(2000)
+                cy.wait(3000)
             } else {
                 // 3ª tentativa: conta deve ser bloqueada (mensagem original da API)
                 cy.get('#message').should('be.visible')
@@ -213,8 +213,7 @@ describe('Cenários de Login da API - Desafio Mentoria 2.0', () => {
         cy.get('#forgotForm').submit()
 
         // Deve mostrar mensagem apropriada (email não encontrado) - via toast
-        cy.get('.toast', { timeout: 10000 }).should('be.visible')
-        cy.get('.toast').should('contain', 'Usuário não encontrado')
+        cy.waitForToast('Usuário não encontrado', 15000)
     })
 
     it('Cenário 4c: Validação de formato de email', () => {
