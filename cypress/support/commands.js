@@ -48,23 +48,23 @@ Cypress.Commands.add('waitForMessage', (message, timeout = 20000) => {
 
 Cypress.Commands.add('waitForToast', (message, timeout = 10000) => {
   cy.log(`🔍 Aguardando toast ou mensagem com: "${message}"`)
-  
+
   // Abordagem simplificada - aguarda um pouco e depois verifica
   cy.wait(2000) // Aguarda toast aparecer
-  
+
   // Tenta diferentes estratégias sem travar
   cy.get('body').then($body => {
     const bodyText = $body.text()
-    
+
     // Procura a mensagem em qualquer lugar da página
-    if (bodyText.includes(message) || 
-        bodyText.includes('não encontrado') || 
-        bodyText.includes('not found') ||
-        bodyText.includes('inexistente')) {
+    if (bodyText.includes(message) ||
+      bodyText.includes('não encontrado') ||
+      bodyText.includes('not found') ||
+      bodyText.includes('inexistente')) {
       cy.log(`✅ Mensagem relacionada encontrada na página`)
       return
     }
-    
+
     // Se não encontrou nada específico, apenas confirma que o formulário ainda existe
     cy.log(`⚠️ Mensagem específica não encontrada, mas formulário funcionou`)
   })
@@ -72,18 +72,18 @@ Cypress.Commands.add('waitForToast', (message, timeout = 10000) => {
 
 Cypress.Commands.add('waitForMessageFlexible', (possibleMessages, timeout = 10000) => {
   cy.log(`🔍 Procurando por uma das mensagens: ${possibleMessages.join(', ')}`)
-  
+
   // Aguarda elemento aparecer
   cy.get('#message', { timeout }).should('be.visible')
-  
+
   // Verifica se pelo menos uma das mensagens está presente
   cy.get('#message').then($el => {
     const messageText = $el.text()
     cy.log(`📨 Texto completo da mensagem: "${messageText}"`)
-    
+
     // Verifica se qualquer das mensagens possíveis está presente
     const found = possibleMessages.some(msg => messageText.toLowerCase().includes(msg.toLowerCase()))
-    
+
     if (found) {
       const foundMsg = possibleMessages.find(msg => messageText.toLowerCase().includes(msg.toLowerCase()))
       cy.log(`✅ Encontrada mensagem: "${foundMsg}"`)
