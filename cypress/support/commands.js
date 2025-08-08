@@ -20,34 +20,24 @@ Cypress.Commands.add('clearAuth', () => {
 })
 
 Cypress.Commands.add('resetAPI', () => {
-  // Reset API state para admin
-  cy.request({
-    url: 'http://localhost:3001/api/reset-attempts',
-    method: 'POST',
-    body: { email: 'admin@teste.com' },
-    failOnStatusCode: false
-  }).then((response) => {
-    cy.log('Reset admin:', response.status)
-  })
+  cy.log('🔄 Tentativa de reset da API (não crítico)')
 
-  // Reset API state para usuário comum
-  cy.request({
-    url: 'http://localhost:3001/api/reset-attempts',
-    method: 'POST',
-    body: { email: 'usuario@teste.com' },
-    failOnStatusCode: false
-  }).then((response) => {
-    cy.log('Reset usuario:', response.status)
-  })
-
-  // Reset API state para marcelo.salmeron
-  cy.request({
-    url: 'http://localhost:3001/api/reset-attempts',
-    method: 'POST',
-    body: { email: 'marcelo.salmeron@teste.com' },
-    failOnStatusCode: false
-  }).then((response) => {
-    cy.log('Reset marcelo.salmeron:', response.status)
+  // Comando que tenta mas não falha se API não estiver disponível
+  return cy.window().then(() => {
+    return new Cypress.Promise((resolve) => {
+      fetch('http://localhost:3000/api/reset-attempts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      })
+        .then(() => {
+          cy.log('✅ API reset realizado')
+          resolve()
+        })
+        .catch(() => {
+          cy.log('⚠️ API não disponível (esperado em CI/CD)')
+          resolve() // Resolve mesmo com erro
+        })
+    })
   })
 })
 

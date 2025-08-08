@@ -99,54 +99,19 @@ jobs:
           mkdir -p _site
           cp -r cypress/reports/mochawesome/* _site/
           
-          # Copy custom template
           cp .github/templates/index.html _site/
           
-          # Replace placeholders in template
           sed -i "s/{{GITHUB_REPOSITORY}}/${{ github.repository }}/g" _site/index.html
           sed -i "s/{{BUILD_DATE}}/$(date -u '+%Y-%m-%d %H:%M:%S UTC')/g" _site/index.html
           sed -i "s/{{GITHUB_REF}}/${{ github.ref_name }}/g" _site/index.html
           sed -i "s/{{GITHUB_SHA}}/${{ github.sha }}/g" _site/index.html
           sed -i "s/{{GITHUB_WORKFLOW}}/${{ github.workflow }}/g" _site/index.html
           
-          # Create a comprehensive README for the Pages site
-          cat > _site/README.md << 'EOF'
-          # 🧪 Test Reports - Roteiro de Férias
-          
-          ## 📊 Última Execução
-          - **Data**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
-          - **Branch**: ${{ github.ref_name }}
-          - **Commit**: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
-          - **Workflow**: ${{ github.workflow }}
-          
-          ## 🔗 Links Úteis
-          - [📄 Relatório Interativo](./index.html)
-          - [📊 Relatório Mochawesome](./mochawesome.html)
-          - [📂 Repositório](https://github.com/${{ github.repository }})
-          - [⚙️ GitHub Actions](https://github.com/${{ github.repository }}/actions)
-          
-          ## 📈 Status dos Testes
-          Os testes são executados automaticamente a cada:
-          - Push na branch main
-          - Pull Request para main
-          - Execução manual via workflow_dispatch
-          
-          ### 🧪 Cenários de Teste
-          1. **Login Scenarios**: Testa autenticação, bloqueio e recuperação de senha
-          2. **API Integration**: Valida comunicação com backend
-          3. **UI Interactions**: Verifica comportamento da interface
-          4. **Error Handling**: Testa tratamento de erros
-          
-          ### 📱 Compatibilidade
-          - ✅ Chrome (Headless)
-          - ✅ Firefox
-          - ✅ Edge
-          - ✅ Mobile Viewports
-          
-          ---
-          
-          **Gerado automaticamente em**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
-          EOF
+          echo "# Test Reports - Roteiro de Férias" > _site/README.md
+          echo "" >> _site/README.md
+          echo "Relatórios automatizados gerados em: $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> _site/README.md
+          echo "Branch: ${{ github.ref_name }}" >> _site/README.md
+          echo "Commit: ${{ github.sha }}" >> _site/README.md
 
       - name: 🔧 Setup Pages
         uses: actions/configure-pages@v4
