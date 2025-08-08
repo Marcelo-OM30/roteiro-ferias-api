@@ -108,14 +108,21 @@ Cypress.Commands.add('waitForMessageFlexible', (possibleMessages, timeout = 2000
   cy.get('#message', { timeout }).should('be.visible')
   
   // Verifica se pelo menos uma das mensagens está presente
-  let messageFound = false
-  possibleMessages.forEach(msg => {
-    cy.get('#message').then($el => {
-      if ($el.text().includes(msg)) {
-        messageFound = true
-        cy.log(`✅ Encontrada mensagem: "${msg}"`)
-      }
-    })
+  cy.get('#message').then($el => {
+    const messageText = $el.text()
+    cy.log(`📨 Texto completo da mensagem: "${messageText}"`)
+    
+    const found = possibleMessages.some(msg => messageText.includes(msg))
+    if (found) {
+      const foundMsg = possibleMessages.find(msg => messageText.includes(msg))
+      cy.log(`✅ Encontrada mensagem: "${foundMsg}"`)
+    } else {
+      cy.log(`❌ Nenhuma das mensagens esperadas encontrada. Texto atual: "${messageText}"`)
+      // Não falha imediatamente, deixa Cypress tentar novamente
+    }
+    
+    // Verifica que pelo menos uma das mensagens está presente
+    expect(possibleMessages.some(msg => messageText.includes(msg))).to.be.true
   })
 })
 
