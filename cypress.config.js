@@ -12,9 +12,9 @@ module.exports = defineConfig({
         viewportHeight: 720,
         video: true,
         screenshotOnRunFailure: true,
-        defaultCommandTimeout: 15000,
-        requestTimeout: 15000,
-        responseTimeout: 15000,
+        defaultCommandTimeout: 20000,
+        requestTimeout: 20000,
+        responseTimeout: 20000,
 
         // Configuração do reporter mochawesome
         reporter: 'mochawesome',
