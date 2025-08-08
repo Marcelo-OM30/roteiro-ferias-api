@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,23 +12,23 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             background: white;
             border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
-        
+
         .header {
             background: linear-gradient(45deg, #26a69a, #1a3c5d);
             color: white;
@@ -36,7 +37,7 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .header::before {
             content: '';
             position: absolute;
@@ -44,42 +45,49 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             animation: shimmer 3s ease-in-out infinite;
         }
-        
+
         @keyframes shimmer {
-            0%, 100% { transform: translateX(-100%); }
-            50% { transform: translateX(100%); }
+
+            0%,
+            100% {
+                transform: translateX(-100%);
+            }
+
+            50% {
+                transform: translateX(100%);
+            }
         }
-        
+
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
             position: relative;
             z-index: 1;
         }
-        
+
         .header p {
             font-size: 1.2em;
             opacity: 0.9;
             position: relative;
             z-index: 1;
         }
-        
+
         .nav {
             background: #f5f5f5;
             padding: 20px 30px;
             border-bottom: 1px solid #e0e0e0;
         }
-        
+
         .nav ul {
             list-style: none;
             display: flex;
             gap: 30px;
             flex-wrap: wrap;
         }
-        
+
         .nav a {
             text-decoration: none;
             color: #333;
@@ -91,50 +99,50 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .nav a:hover {
             background: #26a69a;
             color: white;
             transform: translateY(-2px);
         }
-        
+
         .content {
             padding: 40px 30px;
         }
-        
+
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin-bottom: 40px;
         }
-        
+
         .stat-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 25px;
             border-radius: 15px;
             text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
             transform: translateY(0);
             transition: transform 0.3s ease;
         }
-        
+
         .stat-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .stat-number {
             font-size: 2.5em;
             font-weight: bold;
             margin-bottom: 10px;
         }
-        
+
         .stat-label {
             font-size: 1.1em;
             opacity: 0.9;
         }
-        
+
         .badge {
             display: inline-block;
             padding: 8px 16px;
@@ -145,21 +153,36 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
-        .badge.success { background: #4caf50; color: white; }
-        .badge.error { background: #f44336; color: white; }
-        .badge.info { background: #2196f3; color: white; }
-        .badge.warning { background: #ff9800; color: white; }
-        
+
+        .badge.success {
+            background: #4caf50;
+            color: white;
+        }
+
+        .badge.error {
+            background: #f44336;
+            color: white;
+        }
+
+        .badge.info {
+            background: #2196f3;
+            color: white;
+        }
+
+        .badge.warning {
+            background: #ff9800;
+            color: white;
+        }
+
         .report-frame {
             border: none;
             width: 100%;
             height: 800px;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             background: white;
         }
-        
+
         .meta-info {
             background: #f8f9fa;
             padding: 20px;
@@ -167,7 +190,7 @@
             margin-bottom: 30px;
             border-left: 4px solid #26a69a;
         }
-        
+
         .meta-info h3 {
             color: #1a3c5d;
             margin-bottom: 15px;
@@ -175,13 +198,13 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .meta-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
-        
+
         .meta-item {
             display: flex;
             flex-direction: column;
@@ -190,7 +213,7 @@
             border-radius: 8px;
             border-left: 4px solid #26a69a;
         }
-        
+
         .meta-label {
             font-weight: 600;
             color: #555;
@@ -199,7 +222,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
+
         .meta-value {
             color: #333;
             font-family: 'Courier New', monospace;
@@ -207,18 +230,42 @@
             word-break: break-all;
             padding: 5px 0;
         }
-        
+
         @media (max-width: 768px) {
-            .header h1 { font-size: 2em; }
-            .header p { font-size: 1em; }
-            .content { padding: 20px; }
-            .nav ul { flex-direction: column; gap: 10px; }
-            .stats { grid-template-columns: 1fr; }
-            .meta-grid { grid-template-columns: 1fr; }
-            .meta-item { padding: 12px; }
-            .meta-value { font-size: 0.85em; }
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header p {
+                font-size: 1em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .meta-item {
+                padding: 12px;
+            }
+
+            .meta-value {
+                font-size: 0.85em;
+            }
         }
-        
+
         .footer {
             background: #333;
             color: white;
@@ -226,7 +273,7 @@
             padding: 20px;
             margin-top: 40px;
         }
-        
+
         .loading {
             display: flex;
             justify-content: center;
@@ -235,7 +282,7 @@
             font-size: 1.2em;
             color: #666;
         }
-        
+
         .spinner {
             border: 4px solid #f3f3f3;
             border-top: 4px solid #26a69a;
@@ -245,29 +292,37 @@
             animation: spin 2s linear infinite;
             margin-right: 15px;
         }
-        
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <header class="header">
             <h1>🧪 Test Reports</h1>
             <p>Relatórios Automatizados - Roteiro de Férias</p>
         </header>
-        
+
         <nav class="nav">
             <ul>
                 <li><a href="#"><i class="material-icons">dashboard</i> Dashboard</a></li>
                 <li><a href="./merged-report.html"><i class="material-icons">assessment</i> Relatório Completo</a></li>
-                <li><a href="https://github.com/{{GITHUB_REPOSITORY}}"><i class="material-icons">code</i> Repositório</a></li>
-                <li><a href="https://github.com/{{GITHUB_REPOSITORY}}/actions"><i class="material-icons">build</i> Actions</a></li>
+                <li><a href="https://github.com/{{GITHUB_REPOSITORY}}"><i class="material-icons">code</i>
+                        Repositório</a></li>
+                <li><a href="https://github.com/{{GITHUB_REPOSITORY}}/actions"><i class="material-icons">build</i>
+                        Actions</a></li>
             </ul>
         </nav>
-        
+
         <main class="content">
             <div class="meta-info">
                 <h3><i class="material-icons">info</i> Informações da Execução</h3>
@@ -290,7 +345,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="stats">
                 <div class="stat-card">
                     <div class="stat-number" id="totalTests">--</div>
@@ -309,34 +364,35 @@
                     <div class="stat-label">Duração</div>
                 </div>
             </div>
-            
+
             <div class="loading" id="loadingIndicator">
                 <div class="spinner"></div>
                 Carregando relatório...
             </div>
-            
-            <iframe class="report-frame" id="reportFrame" src="./merged-report.html" style="display: none;" onload="handleFrameLoad()"></iframe>
+
+            <iframe class="report-frame" id="reportFrame" src="./merged-report.html" style="display: none;"
+                onload="handleFrameLoad()"></iframe>
         </main>
-        
+
         <footer class="footer">
             <p>&copy; 2025 Marcelo OM30 - Relatório gerado automaticamente via GitHub Actions</p>
         </footer>
     </div>
-    
+
     <script>
         function handleFrameLoad() {
             const loading = document.getElementById('loadingIndicator');
             const frame = document.getElementById('reportFrame');
-            
+
             setTimeout(() => {
                 try {
                     // Verificar se o iframe carregou com sucesso
                     const frameDoc = frame.contentDocument || frame.contentWindow.document;
-                    
+
                     if (frameDoc && frameDoc.title !== 'Error 404 - Not Found') {
                         loading.style.display = 'none';
                         frame.style.display = 'block';
-                        
+
                         const stats = extractStatsFromReport(frameDoc);
                         updateStats(stats);
                     } else {
@@ -354,7 +410,7 @@
                 }
             }, 2000);
         }
-        
+
         function extractStatsFromReport(doc) {
             try {
                 const statsElements = doc.querySelectorAll('.stats-item');
@@ -364,7 +420,7 @@
                     failed: '0',
                     duration: '< 1min'
                 };
-                
+
                 return stats;
             } catch (e) {
                 return {
@@ -375,19 +431,19 @@
                 };
             }
         }
-        
+
         function updateStats(stats) {
             document.getElementById('totalTests').textContent = stats.total;
             document.getElementById('passedTests').textContent = stats.passed;
             document.getElementById('failedTests').textContent = stats.failed;
             document.getElementById('duration').textContent = stats.duration;
         }
-        
+
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const frame = document.getElementById('reportFrame');
                 const loading = document.getElementById('loadingIndicator');
-                
+
                 if (frame.style.display === 'none') {
                     loading.innerHTML = `
                         <div style="text-align: center; color: #ff9800;">
@@ -398,12 +454,12 @@
                     `;
                 }
             }, 3000);
-            
+
             // Timeout final - se não carregar em 10 segundos, mostra erro
             setTimeout(() => {
                 const frame = document.getElementById('reportFrame');
                 const loading = document.getElementById('loadingIndicator');
-                
+
                 if (frame.style.display === 'none') {
                     loading.innerHTML = `
                         <div style="text-align: center; color: #f44336;">
@@ -417,4 +473,5 @@
         });
     </script>
 </body>
+
 </html>

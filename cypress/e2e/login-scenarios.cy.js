@@ -45,7 +45,7 @@ describe('Cenários de Login da API - Desafio Mentoria 2.0', () => {
 
         // Verificar mensagem de sucesso
         cy.waitForMessage('Login realizado com sucesso!')
-        
+
         // Verificar classe verde com proteção defensiva
         cy.get('body').then($body => {
             if ($body.find('#message').length > 0) {
